@@ -6,14 +6,16 @@ pipeline {
                     description: 'Read Jenkinsfile and exit.')
             }
     stages {
-        stage('update apt cache') {
+        stage('unit test') {
             steps {
-                sh 'sudo apt update'
+                sh
+                    python3 -pytest ./converter/tests/test_unit.py
+                    python3 -pytest ./prime/tests/test_unit.py
             }
-        }
-        stage('install apache') {
+         }
+        stage('integration test') {
             steps {
-                sh 'sudo apt install apache2 -y'
+                
             }
         }
     }
